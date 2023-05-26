@@ -173,7 +173,7 @@ module.exports = [
     "languageCode": "ko_KR",
     "languageName": "Korean",
     "languageNativeName": "한국어",
-    "translationRatio": 0.515635762501722
+    "translationRatio": 0.5222222222222
   },
   {
     "languageCode": "lt_LT",
