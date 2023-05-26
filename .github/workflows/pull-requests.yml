@@ -1,12 +1,12 @@
 name: GDevelop Issues automatic workflow
 on:
   pull_request:
+    branches:
+      - 'chore/test'
     types: 
       - opened
       - reopened
       - synchronize
-    branches:
-      - 'chore/test'
 jobs:
   read-locales-metadata:
     runs-on: ubuntu-latest
