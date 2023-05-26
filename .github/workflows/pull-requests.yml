@@ -6,7 +6,7 @@ on:
       - reopened
       - synchronize
     branches:
-      - 'chore/update-translations'
+      - 'chore/test'
 jobs:
   read-locales-metadata:
     runs-on: ubuntu-latest
