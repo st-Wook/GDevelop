@@ -23,8 +23,8 @@ jobs:
           name: Stop job if commit message contains 'Update translations' and skip keywords
           command: |
             COMMIT_MSG=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
-            if [[ "$COMMIT_MSG" =~ Update\ translations.*(\[skip\ travis\]|\[skip\ appveyor\]) ]]; then
-              echo "Commit message contains 'Update translations' and skip keywords, stopping job."
+            if [[ "$COMMIT_MSG" =~ Update\ translations.* && "$COMMIT_MSG" =~ skip ]]; then
+              echo "Commit message contains 'Update translations' and 'skip', stopping job."
               circleci-agent step halt
             fi
 
@@ -107,8 +107,8 @@ jobs:
           name: Stop job if commit message contains 'Update translations' and skip keywords
           command: |
             COMMIT_MSG=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
-            if [[ "$COMMIT_MSG" =~ Update\ translations.*(\[skip\ travis\]|\[skip\ appveyor\]) ]]; then
-              echo "Commit message contains 'Update translations' and skip keywords, stopping job."
+            if [[ "$COMMIT_MSG" =~ Update\ translations.* && "$COMMIT_MSG" =~ skip ]]; then
+              echo "Commit message contains 'Update translations' and 'skip', stopping job."
               circleci-agent step halt
             fi
 
@@ -194,8 +194,8 @@ jobs:
           name: Stop job if commit message contains 'Update translations' and skip keywords
           command: |
             COMMIT_MSG=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
-            if [[ "$COMMIT_MSG" =~ Update\ translations.*(\[skip\ travis\]|\[skip\ appveyor\]) ]]; then
-              echo "Commit message contains 'Update translations' and skip keywords, stopping job."
+            if [[ "$COMMIT_MSG" =~ Update\ translations.* && "$COMMIT_MSG" =~ skip ]]; then
+              echo "Commit message contains 'Update translations' and 'skip', stopping job."
               circleci-agent step halt
             fi
 
