@@ -10,7 +10,7 @@ auto_cancel:
 blocks:
   - name: Install
     run:
-      when: "change_in('/', {exclude: ['/newIDE/app/src/locales']})"
+      when: "change_in('/', {exclude: ['/newIDE/app/src/locales/**']})"
     task:
       jobs:
         - name: Install node_modules and cache them
