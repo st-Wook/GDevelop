@@ -10,6 +10,8 @@ on:
   # Launch on all commits.
   # Skip if only files in the locales directory are changed
   push:
+    branches-ignore:
+      - 'chore/**'
     paths-ignore:
       - 'newIDE/app/src/locales/**'
   # Allows to run this workflow manually from the Actions tab,

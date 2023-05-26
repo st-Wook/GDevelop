@@ -5,11 +5,10 @@ on:
       - opened
       - reopened
       - synchronize
-    paths:
-      - 'newIDE/app/src/locales/**'
+    branches:
+      - 'chore/update-translations'
 jobs:
   read-locales-metadata:
-    if: github.event.pull_request.title == '[Auto PR] Update translations'
     runs-on: ubuntu-latest
     env:
       COMMENT_TITLE: "Translation ratio changes"
