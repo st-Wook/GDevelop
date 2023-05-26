@@ -6,11 +6,9 @@ agent:
     os_image: ubuntu2004
 auto_cancel:
   running:
-    when: "true"
+    when: 'true'
 blocks:
   - name: Install
-    run:
-      when: "change_in('/', {exclude: ['/newIDE/app/src/locales']})"
     task:
       jobs:
         - name: Install node_modules and cache them
@@ -40,6 +38,8 @@ blocks:
                 cache store GDJS-tests-node_modules-$SEMAPHORE_GIT_BRANCH-revision-$(checksum GDJS/tests/package-lock.json) GDJS/tests/node_modules
               fi
     dependencies: []
+    skip:
+      when: 'change_in(''/'', {exclude: [''/newIDE/app/src/locales'']})'
   - name: Type checks
     dependencies:
       - Install
