@@ -23,9 +23,9 @@ init:
 install:
   - ps: |
       try {
-        Install-Product node $env:nodejs_version
-      } catch {
         Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+      } catch {
+        Install-Product node $env:nodejs_version
       }
   # Build GDevelop.js (and run tests to ensure it works).
   # (in a subshell to avoid Emscripten polluting the Node.js and npm version for the rest of the build)
@@ -63,6 +63,7 @@ build_script:
       cd newIDE\electron-app
 
       node scripts/build.js --win nsis --publish=never
+
   - ps: >-
       Remove-Item -Path Env:CSC_LINK ; Remove-Item -Path Env:CSC_KEY_PASSWORD ; node scripts/build.js --skip-app-build --win appx --publish=never
 
