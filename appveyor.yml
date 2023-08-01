@@ -19,7 +19,6 @@ environment:
 
 platform:
   - x64
-  - x86
 
 init:
   - cmd: set NODE_OPTIONS=--max-old-space-size=8192
