@@ -12,10 +12,21 @@ branches:
   only:
     - master
     - /experimental-build.*/
+skip_tags: true # Don't rebuild on tags.
+
+environment:
+  nodejs_version: '16'
+
 init:
-  - ps: Install-Product node 16
   - cmd: set NODE_OPTIONS=--max-old-space-size=8192
+
 install:
+  - ps: |
+      try {
+        Install-Product node $env:nodejs_version
+      } catch {
+        Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+      }
   # Build GDevelop.js (and run tests to ensure it works).
   # (in a subshell to avoid Emscripten polluting the Node.js and npm version for the rest of the build)
   - cmd: >-
@@ -48,11 +59,11 @@ install:
 # Package the app for Windows (and sign it with the certificate set in environment variables).
 # Don't sign the appx (it will be signed by the Microsoft Store).
 build_script:
-  - ps: >-
+  - cmd: >-
       cd newIDE\electron-app
 
       node scripts/build.js --win nsis --publish=never
-
+  - ps: >-
       Remove-Item -Path Env:CSC_LINK ; Remove-Item -Path Env:CSC_KEY_PASSWORD ; node scripts/build.js --skip-app-build --win appx --publish=never
 
       cd ..\..
