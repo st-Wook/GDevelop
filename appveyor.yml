@@ -17,9 +17,6 @@ skip_tags: true # Don't rebuild on tags.
 environment:
   nodejs_version: '16'
 
-init:
-  - cmd: set NODE_OPTIONS=--max-old-space-size=8192
-
 install:
   - ps: |
       try {
