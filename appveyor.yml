@@ -5,7 +5,7 @@
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: true
-image: Visual Studio 2019
+image: Visual Studio 2022
 clone_depth: 5
 # Only build
 branches:
@@ -17,12 +17,15 @@ skip_tags: true # Don't rebuild on tags.
 environment:
   nodejs_version: '16'
 
+init:
+  - cmd: set NODE_OPTIONS=--max-old-space-size=8192
+
 install:
   - ps: |
       try {
-        Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
-      } catch {
         Install-Product node $env:nodejs_version
+      } catch {
+        Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
       }
   # Build GDevelop.js (and run tests to ensure it works).
   # (in a subshell to avoid Emscripten polluting the Node.js and npm version for the rest of the build)
