@@ -17,16 +17,15 @@ skip_tags: true # Don't rebuild on tags.
 environment:
   nodejs_version: '16'
 
+Platform:
+  - x64
+  - x86
+
 init:
   - cmd: set NODE_OPTIONS=--max-old-space-size=8192
 
 install:
-  - ps: |
-      try {
-        Install-Product node $env:nodejs_version
-      } catch {
-        Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
-      }
+  - ps: Install-Product node $env:nodejs_version $env:platform
   # Build GDevelop.js (and run tests to ensure it works).
   # (in a subshell to avoid Emscripten polluting the Node.js and npm version for the rest of the build)
   - cmd: >-
